@@ -33,9 +33,21 @@ function updateState() {
             let paddingAndMargins = 6;
             card.style.height = (estimate * baseSize - paddingAndMargins) + 'px';
         });
-        let totalsSpan = list.querySelector('.lane-total');
-        totalsSpan.innerText = sheetTotal;
+        updateTotal(list, sheetTotal);
     });
+}
+
+function updateTotal(list, total) {
+    let totalsSpan = list.querySelector('.lane-total');
+    totalsSpan.innerText = total;
+
+    if (total < 32) {
+        totalsSpan.style.color = '#daa520';
+    } else if (total === 32) {
+        totalsSpan.style.color = 'green';
+    } else {
+        totalsSpan.style.color = 'red';
+    }
 }
 
 function addTotalsToSheets() {
