@@ -16,6 +16,9 @@ function observeElement(obj, callback) {
 };
 
 function updateState() {
+    let boardTitle = document.querySelector('.board-header-btn-text');
+    if (!boardTitle || !boardTitle.innerText.includes('PLG')) return;
+
     let lists = document.querySelectorAll('.list');
     lists.forEach(list => {
         let sheetTotal = 0;
@@ -23,10 +26,8 @@ function updateState() {
         cards.forEach(card => {
             let cardTitle = card.querySelector('.list-card-title').innerText;
             let estimate = parseInt(cardTitle.substring(cardTitle.lastIndexOf("(") + 1, cardTitle.lastIndexOf(")")));
-            if (!estimate) {
-                // card.style.background = '#ffdddd';
-                return;
-            }
+            if (!estimate) return;
+
             sheetTotal += estimate;
 
             let baseSize = 18;
@@ -50,7 +51,7 @@ function updateTotal(list, total) {
     }
 }
 
-function addTotalsToSheets() {
+function addTotalsSpanToLists() {
     let listHeaders = document.querySelectorAll('.list-header');
     listHeaders.forEach(list => {
         let span = document.createElement('span');
@@ -59,12 +60,7 @@ function addTotalsToSheets() {
     });
 }
 
-addTotalsToSheets();
+addTotalsSpanToLists();
 updateState();
 observeElement(document.querySelector('body'), updateState);
-
-
-
-
-
 

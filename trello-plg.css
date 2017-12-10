@@ -1,4 +1,8 @@
 
+.list {
+    /*background: #98ff98 !important;*/
+}
+
 .lane-total {
     position: absolute;
     right: 125px;
