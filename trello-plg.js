@@ -15,24 +15,41 @@ function observeElement(obj, callback) {
     }
 };
 
-function updateCardSize() {
-    let cards = document.querySelectorAll('.list-card');
-    cards.forEach(card => {
-        let title = card.querySelector('.list-card-title').innerText;
-        let estimate = parseInt(title.substring(title.lastIndexOf("(") + 1, title.lastIndexOf(")")));
-        if (!estimate) {
-            // card.style.background = '#ffdddd';
-            return;
-        }
+function updateState() {
+    let lists = document.querySelectorAll('.list');
+    lists.forEach(list => {
+        let sheetTotal = 0;
+        let cards = list.querySelectorAll('.list-card');
+        cards.forEach(card => {
+            let cardTitle = card.querySelector('.list-card-title').innerText;
+            let estimate = parseInt(cardTitle.substring(cardTitle.lastIndexOf("(") + 1, cardTitle.lastIndexOf(")")));
+            if (!estimate) {
+                // card.style.background = '#ffdddd';
+                return;
+            }
+            sheetTotal += estimate;
 
-        let baseSize = 15;
-        let paddingAndMargins = 6;
-        card.style.height = (estimate * baseSize - paddingAndMargins) + 'px';
+            let baseSize = 18;
+            let paddingAndMargins = 6;
+            card.style.height = (estimate * baseSize - paddingAndMargins) + 'px';
+        });
+        let totalsSpan = list.querySelector('.lane-total');
+        totalsSpan.innerText = sheetTotal;
     });
 }
 
-updateCardSize();
-observeElement(document.querySelector('body'), updateCardSize);
+function addTotalsToSheets() {
+    let listHeaders = document.querySelectorAll('.list-header');
+    listHeaders.forEach(list => {
+        let span = document.createElement('span');
+        span.className = 'lane-total';
+        list.insertBefore(span, list.childNodes[3]);
+    });
+}
+
+addTotalsToSheets();
+updateState();
+observeElement(document.querySelector('body'), updateState);
 
 
 

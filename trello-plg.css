@@ -2,3 +2,8 @@ body {
     /*background-color: red !important;*/
 }
 
+.lane-total {
+    position: absolute;
+    right: 125px;
+    top: 10px;
+}
