@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Trello PLG",
+  "description": "It's like Planning Game but not!",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["https://trello.com/*"],
+      "css": ["trello-plg.css"],
+      "js": ["trello-plg.js"]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}
